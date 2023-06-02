@@ -1,0 +1,29 @@
+@URL_DEV=http://localhost:8080/product
+
+### insert a product
+POST {{URL_DEV}}/insert
+Content-Type: application/json
+
+{
+     "productInfo": {
+          "name":"T-shirt",
+          "description":"T-shirt",
+          "thumbnailurl":"http://adasdad/asda.jpg",
+          "baseprice": 1000,
+          "discountprice": 8000
+     }
+}
+
+### get all product
+GET {{URL_DEV}}
+
+### get by id
+GET {{URL_DEV}}/2
+
+### delete a product
+POST {{URL_DEV}}/delete
+Content-Type: application/json
+
+{
+     "productId":1
+}

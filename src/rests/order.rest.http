@@ -1,0 +1,29 @@
+@URL_DEV=http://localhost:8080/order
+
+### insert a order
+POST {{URL_DEV}}/insert
+Content-Type: application/json
+
+{
+     "orderInfo": {
+          "productid":2,
+          "buyername": "heo",
+          "phonenumber": "0326645655",
+          "email":"omegalumine1@gmail.com",
+          "buyeraddress":"ads"
+     }
+}
+
+### get all order
+GET {{URL_DEV}}
+
+### get by id
+GET {{URL_DEV}}/1
+
+### delete a order
+POST {{URL_DEV}}/delete
+Content-Type: application/json
+
+{
+     "orderId":1
+}
