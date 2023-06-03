@@ -10,10 +10,19 @@ module.exports = {
           return await supabase.from(table).select().eq("id",id)
      },
      insertData : async function insertData(table, data){
-          console.log(data)
-          return await supabase.from(table).insert(data)
+          return await supabase.from(table).insert(data).select()
      },
      deleteData : async function deleteData(table, id){
           return await supabase.from(table).delete().eq('id', id)
+     },
+     uploadImage : async function uploadImage(product,file){
+          let { error } = await supabase.storage
+          .from('products')
+          .upload(`${product}/thumbnail.jpg`, file.buffer, { upsert: false })
+          if (error){
+               console.log(error)
+               return " Not Oke"
+          }
+          return "Oke"
      }
 }
