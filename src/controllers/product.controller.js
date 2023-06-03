@@ -4,7 +4,6 @@ module.exports = {
      getAllProducts: async (req,res)=>{
           try{
                let result = await getAllData("products")
-               console.log(result)
                res.status(result.status).json(result.data)
           } catch(e) {
                console.log(e)    

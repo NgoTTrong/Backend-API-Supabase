@@ -8,7 +8,6 @@ Content-Type: application/json
      "productInfo": {
           "name":"T-shirt",
           "description":"T-shirt",
-          "thumbnailurl":"http://adasdad/asda.jpg",
           "baseprice": 1000,
           "discountprice": 8000
      }
