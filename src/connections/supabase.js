@@ -13,15 +13,24 @@ module.exports = {
           return await supabase.from(table).insert(data).select()
      },
      deleteData : async function deleteData(table, id){
-          return await supabase.from(table).delete().eq('id', id)
+          return await supabase.from(table).delete().eq('id', id).select()
      },
      uploadImage : async function uploadImage(product,file){
           let { error } = await supabase.storage
           .from('products')
-          .upload(`${product}/thumbnail.jpg`, file.buffer, { upsert: false })
+          .upload(`${product}/thumbnail.jpg`, file.buffer, { upsert: false})
           if (error){
                console.log(error)
                return " Not Oke"
+          }
+          return "Oke"
+     },
+     deleteImageFolder: async function deleteImageFolder(bucket,folder){
+          const { error } = await supabase.storage
+			.from(bucket)
+			.remove([`${folder}/thumbnail.jpg`]);
+          if (error){
+               return "Not oke"
           }
           return "Oke"
      }

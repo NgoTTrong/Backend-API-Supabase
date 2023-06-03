@@ -1,4 +1,4 @@
-const {getAllData,insertData,deleteData,getDataById,uploadImage} = require('../connections/supabase')
+const {getAllData,insertData,deleteData,getDataById,uploadImage,deleteImageFolder} = require('../connections/supabase')
 
 module.exports = {
      getAllProducts: async (req,res)=>{
@@ -34,6 +34,12 @@ module.exports = {
      deleteProduct: async (req,res)=>{
           try{
                let result = await deleteData("products",req.body.productId)
+               try{
+                    console.log(result.data[0].name+result.data[0].id)
+                    console.log(await deleteImageFolder("products",result.data[0].name+result.data[0].id))
+               } catch(e) {
+                    console.log(e)
+               }
                res.status(result.status).json(result)
           } catch(e) {
                console.log(e)    
