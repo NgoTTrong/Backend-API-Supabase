@@ -2,6 +2,7 @@ Create Table Products(
      id SERIAL Primary Key,
      name varchar(255) NOT NULL,
      description varchar(255),
+     thumbnailUrl varchar(255),
      basePrice int NOT NULL,
      discountPrice int
 );

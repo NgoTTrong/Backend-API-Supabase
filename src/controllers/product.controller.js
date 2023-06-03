@@ -1,4 +1,4 @@
-const {getAllData,insertData,deleteData,getDataById,uploadImage,deleteImageFolder} = require('../connections/supabase')
+const {getAllData,insertData,deleteData,getDataById,uploadImage,deleteImageFolder,updateUrl} = require('../connections/supabase')
 
 module.exports = {
      getAllProducts: async (req,res)=>{
@@ -17,13 +17,18 @@ module.exports = {
                console.log(e)    
           }
      },
-     insertProduct: async (req,res)=>{
+     insertProduct: async (req,res)=>{  
           try{
                const file = req.file;
                let result = await insertData("products",JSON.parse(req.body.productInfo))
+               console.log(result);
                try{
-                    await uploadImage(JSON.parse(req.body.productInfo).name + result.data[0].id,file)
-               } catch(e) {
+                    let upImg = await uploadImage(result.data[0].id,file)
+                    if (upImg === "Oke"){
+                         await updateUrl("products",result.data[0].id)
+                    }
+               }
+                catch(e) {
                     console.log(e)
                }
                res.status(result.status).json(result)
@@ -35,14 +40,13 @@ module.exports = {
           try{
                let result = await deleteData("products",req.body.productId)
                try{
-                    console.log(result.data[0].name+result.data[0].id)
                     console.log(await deleteImageFolder("products",result.data[0].name+result.data[0].id))
                } catch(e) {
                     console.log(e)
                }
                res.status(result.status).json(result)
           } catch(e) {
-               console.log(e)    
-          } 
+               console.log(e)   
+          }
      }
 }

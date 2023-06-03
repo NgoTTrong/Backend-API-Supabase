@@ -2,7 +2,7 @@ const {
      getAllProducts,
      insertProduct,
      deleteProduct,
-     getProductById
+     getProductById,
 } = require('../controllers/product.controller')
 const multer = require('multer');
 const upload = multer();

@@ -1,4 +1,5 @@
-const {createClient} = require('@supabase/supabase-js')
+const {createClient} = require('@supabase/supabase-js');
+const {StorageBucket} = require('@supabase/storage-js');
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
 
@@ -15,15 +16,34 @@ module.exports = {
      deleteData : async function deleteData(table, id){
           return await supabase.from(table).delete().eq('id', id).select()
      },
-     uploadImage : async function uploadImage(product,file){
+     uploadImage : async function uploadImage(productId,file){
           let { error } = await supabase.storage
           .from('products')
-          .upload(`${product}/thumbnail.jpg`, file.buffer, { upsert: false})
+          .upload(`${productId}/thumbnail.jpg`, file.buffer, { upsert: false})
           if (error){
                console.log(error)
                return " Not Oke"
           }
           return "Oke"
+     },
+     downloadImage: async function downloadImage(productID){
+          console.log(`${productID}/thumbnail.jpg`)
+          const { data, error } = await supabase.storage.from('products').download(`${productID}/thumbnail.jpg`)
+          if (error){
+               return "Not Oke"
+          }
+          return data
+     },
+     updateUrl: async function updateUrl(bucketName,productId){
+          const { data } = supabase
+                              .storage
+                              .from(bucketName)
+                              .getPublicUrl(`${productId}/thumbnail.jpg`)
+          const { error } = await supabase
+          .from(bucketName)
+          .update({ thumbnailurl: data.publicUrl })
+          .eq('id', productId)
+          console.log(data.publicUrl)
      },
      deleteImageFolder: async function deleteImageFolder(bucket,folder){
           const { error } = await supabase.storage

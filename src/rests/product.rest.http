@@ -17,7 +17,7 @@ Content-Type: application/json
 GET {{URL_DEV}}
 
 ### get by id
-GET {{URL_DEV}}/2
+GET {{URL_DEV}}/30
 
 ### delete a product
 POST {{URL_DEV}}/delete
@@ -26,3 +26,6 @@ Content-Type: application/json
 {
      "productId":26
 }
+
+### get image of a product
+GET {{URL_DEV}}/image/30
