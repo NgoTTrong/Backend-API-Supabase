@@ -24,6 +24,7 @@ module.exports = {
                     return
                }
                let result = await insertData("orders",req.body.orderInfo)
+               console.log(result)
                res.status(result.status).json(result)
           } catch(e) {
                console.log(e)    
