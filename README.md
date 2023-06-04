@@ -1,33 +1,45 @@
 # Backend-API-Supabase
+
 - Provice API to manipulate to Supabase
 - Routes system:
+
   +"/product": get method to get all products
+  
   +"/product/:id":get method to get product by id
+  
   +"/product/insert":post method to insert a product
+  
   +"/product/delete": post method to delete a product
+  
   +"/order": get method to get all orders
+  
   + etc...
 
 ## API
 - Insern a product: add to body of post request a json data have format like:
 
 {
+
      "productInfo": {
           "name": {product_name},
           "description":  {product_description},
           "baseprice": {product_base_price},
           "discountprice": {product_discount_price}
      }
+     
 }
 
 - Delete a product: add to body of post request a json data have format like:
 
 {
+
      "productId": {product_id}
+     
 }
 
 - Insern an order: add to body of post request a json data have format like:
 {
+
      "orderInfo": {
           "productid": {product_id},
           "buyername":  {customer_name},
@@ -37,6 +49,7 @@
           "quantity": {quantity},
           "totalpaid":{total_paid}
      }
+     
 }
 
 Note: replace data into {___} field
