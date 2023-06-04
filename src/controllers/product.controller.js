@@ -39,8 +39,10 @@ module.exports = {
      deleteProduct: async (req,res)=>{
           try{
                let result = await deleteData("products",req.body.productId)
+               console.log(result)
                try{
-                    console.log(await deleteImageFolder("products",result.data[0].name+result.data[0].id))
+                    console.log(await deleteImageFolder("products",result.data[0].id))
+                    console.log("here")
                } catch(e) {
                     console.log(e)
                }

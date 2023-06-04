@@ -9,7 +9,7 @@ Create Table Products(
 
 Create Table Orders(
      id SERIAL Primary Key,
-     productId int Not Null,
+     productId int,
      buyerName varchar(255) NOT NULL,
      quantity int Not Null,
      totalpaid int Not Null,  
@@ -17,5 +17,5 @@ Create Table Orders(
      phoneNumber varchar(255) NOT NULL,
      email varchar(255) NOT NULL,
      buyerAddress varchar(255) NOT NULL,
-     FOREIGN KEY (productId) REFERENCES Products(id)
+     FOREIGN KEY (productId) REFERENCES Products(id) ON DELETE SET NULL
 );
