@@ -38,6 +38,7 @@
 }
 
 - Insern an order: add to body of post request a json data have format like:
+
 {
 
      "orderInfo": {
